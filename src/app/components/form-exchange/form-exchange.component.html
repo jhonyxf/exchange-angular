@@ -1,0 +1,34 @@
+<div class="container">
+  <form class="form">
+    <mat-form-field class="full-width">
+      <mat-label>Enter the currency code</mat-label>
+      <input matInput [(ngModel)]="tipoMoeda" name="tipoMoeda" maxlength="3" />
+    </mat-form-field>
+  </form>
+  <button (click)="resultadoCambio()">Exchange result</button>
+  <hr />
+  <h3 *ngIf="erro">Ocorreu um erro ao consultar a API</h3>
+</div>
+<div *ngIf="exibirSpinner" class="container">
+  <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="cambioAtual && cambioAtual.exchangeRate && !exibirSpinner">
+  <section class="secao space-between">
+    <div class="item">
+      <p>Exchange rate now</p>
+      <p>
+        <span>{{
+          cambioAtual.lastUpdatedAt | date : "dd/MM/yyyy - HH'h'mm"
+        }}</span>
+      </p>
+    </div>
+    <div class="item">
+      <h4 class="cor-azul">{{ cambioAtual.fromSymbol }}/BRL</h4>
+    </div>
+  </section>
+  <div class="container">
+    <h2 class="cor-azul">{{ formatarValor(cambioAtual.exchangeRate) }}</h2>
+  </div>
+
+  <app-list-exchange [tipoMoeda]="tipoMoeda"></app-list-exchange>
+</div>

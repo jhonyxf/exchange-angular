@@ -1,1 +1,66 @@
 /* You can add global styles to this file, and also import other style files */
+@import '@angular/material/theming';
+@include mat-core();
+
+$custom-app-primary: mat-palette($mat-blue);
+$custom-app-secondary: mat-palette($mat-indigo, A200, A400, 700);
+$custom-app-warn: mat-palette($mat-red);
+
+$custom-theme: mat-light-theme($custom-app-primary, $custom-app-secondary,$custom-app-warn);
+
+@include angular-material-theme($custom-theme);
+
+:root {
+    --cor-azul: #07B0FB; /* Substitua pela cor desejada */
+  }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+button{
+    background-color: var(--cor-azul);
+    min-width: 330px;
+    height: 48px;
+    padding:4px 16px;
+    border-radius: 100px;
+    color: white;
+    text-transform: uppercase;
+    border: 0;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    margin: 20px 0;
+
+
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 30px;
+    text-transform: uppercase;
+    padding: 30px 0;
+}
+
+hr{
+    width: 80%;
+    height: 2px;
+    border: 0;
+}
+.p-10{
+    padding: 10px;
+}
+
+.cor-azul{
+    color: var(--cor-azul);
+}
+
+

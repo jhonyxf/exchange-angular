@@ -1,0 +1,56 @@
+<div class="container">
+  <section (click)="resultadoCambio()" class="secaoTitulo space-between">
+    <div class="item texto">LAST 30 DAYS</div>
+    <div class="item">
+      <img
+        [src]="
+          painelAberto
+            ? '../../../assets/images/contrair.png'
+            : '../../../assets/images/expandir.png'
+        "
+      />
+    </div>
+  </section>
+
+  <ul *ngIf="cambioDiario && painelAberto">
+    <li *ngFor="let cambio of cambioDiario.data; let i = index">
+      <p class="data">{{ cambio.date | date : "dd/MM/yyyy" }}</p>
+      <section class="secaoTitulo flex-start">
+        <div class="item valores">OPEN:</div>
+        <div class="item valores">
+          <span>R$ {{ fixarValor(cambio.open, 4) }}</span>
+        </div>
+        <div class="item valores">HIGH:</div>
+        <div class="item valores">
+          <span>R$ {{ fixarValor(cambio.high, 4) }}</span>
+        </div>
+      </section>
+      <section class="secaoTitulo flex-start">
+        <div class="item valores">CLOSE:</div>
+        <div class="item valores">
+          <span>R$ {{ fixarValor(cambio.close, 4) }}</span>
+        </div>
+        <div class="item valores">LOW:</div>
+        <div class="item valores">
+          <span>R$ {{ fixarValor(cambio.low, 4) }}</span>
+        </div>
+      </section>
+      <section class="secaoTitulo flex-start">
+        <div class="item valores" *ngIf="cambioDiario.data && i > 0">
+          CLOSE DIFF (%):
+          <strong [ngClass]="cambio.percent < 0 ? 'cor-vermelho' : 'cor-verde'"
+            >{{ fixarValor(cambio.percent, 2) }}%</strong
+          >
+          <img
+            class="seta"
+            [src]="
+              cambio.percent < 0
+                ? '../../../assets/images/seta-vermelha.png'
+                : '../../../assets/images/seta-verde.png'
+            "
+          />
+        </div>
+      </section>
+    </li>
+  </ul>
+</div>
