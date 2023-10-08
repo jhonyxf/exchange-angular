@@ -11,15 +11,17 @@ export class ListExchangeComponent {
   @Input()
   tipoMoeda!: string;
 
-  cambioDiario?: CambioDiario;
-
+  cambioDiario!: CambioDiario | null;
+  exibirSpinner = false;
   painelAberto = false;
 
   constructor(private exchangeService: ExchangeService) {}
 
   resultadoCambio() {
+    this.cambioDiario = null;
     this.painelAberto = !this.painelAberto;
     if (this.painelAberto) {
+      this.exibirSpinner = true;
       this.exchangeService.get30Cambio(this.tipoMoeda).subscribe({
         next: (cambioDiario: CambioDiario) => {
           if (cambioDiario.success) {
@@ -28,6 +30,7 @@ export class ListExchangeComponent {
           } else {
             console.error('Erro ao buscar dados da API');
           }
+          this.exibirSpinner = false;
         },
         error: () => {
           console.error('Não encontrado');

@@ -12,6 +12,10 @@
     </div>
   </section>
 
+  <div *ngIf="exibirSpinner" class="container">
+    <mat-spinner></mat-spinner>
+  </div>
+
   <ul *ngIf="cambioDiario && painelAberto">
     <li *ngFor="let cambio of cambioDiario.data; let i = index">
       <p class="data">{{ cambio.date | date : "dd/MM/yyyy" }}</p>
@@ -36,7 +40,7 @@
         </div>
       </section>
       <section class="secaoTitulo flex-start">
-        <div class="item valores" *ngIf="cambioDiario.data && i > 0">
+        <div class="item valores" *ngIf="cambioDiario.data && i >= 0">
           CLOSE DIFF (%):
           <strong [ngClass]="cambio.percent < 0 ? 'cor-vermelho' : 'cor-verde'"
             >{{ fixarValor(cambio.percent, 2) }}%</strong
